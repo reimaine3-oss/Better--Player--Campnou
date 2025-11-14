@@ -12,22 +12,18 @@ body {
 .music-player {
     display: flex;
     flex-direction: column;
-    /* Reduzindo o padding */
     padding: 12px; 
     background-color: #f8f8f8;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* Reduzindo drasticamente a largura */
-    width: 240px; /* De 280px para 240px */
-    /* Reduzindo o espaçamento entre as linhas */
-    gap: 10px; /* De 12px para 10px */
+    width: 240px; /* Tamanho pequeno mantido */
+    gap: 10px; /* Espaçamento pequeno mantido */
 }
 
 .player-row {
     display: flex;
-    align-items: center; /* Mantém o alinhamento vertical */
+    align-items: center; /* Alinhamento vertical mantido */
     width: 100%;
-    /* Reduzindo o espaçamento da linha */
     gap: 10px; 
 }
 
@@ -36,11 +32,9 @@ body {
     background: #007bff;
     border: none;
     color: white;
-    /* Reduzindo o ícone */
-    font-size: 16px; /* De 18px para 16px */
-    /* Reduzindo o botão */
-    width: 36px; /* De 40px para 36px */
-    height: 36px; /* De 40px para 36px */
+    font-size: 16px; /* Tamanho pequeno mantido */
+    width: 36px; /* Tamanho pequeno mantido */
+    height: 36px; /* Tamanho pequeno mantido */
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -57,24 +51,32 @@ body {
 /* Caixa do Ícone de Volume */
 .icon-wrapper {
     color: #007bff;
-    /* Reduzindo o ícone */
-    font-size: 16px; /* De 18px para 16px */
-    /* Reduzindo a caixa para coincidir com o botão */
-    width: 36px; /* De 40px para 36px */
-    height: 36px; /* De 40px para 36px */
+    font-size: 16px; /* Tamanho pequeno mantido */
+    width: 36px; /* Tamanho pequeno mantido */
+    height: 36px; /* Tamanho pequeno mantido */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
 }
 
-/* Containers dos Sliders (AQUI ESTÁ A CORREÇÃO DO BUG) */
+/* * ======================================================================
+ * AQUI ESTÁ A CORREÇÃO DEFINITIVA (ESPERO!)
+ * ======================================================================
+ * Em vez de 'flex-grow' (que falhou), vamos calcular a largura exata
+ * que sobra para o slider.
+*/
 .progress-container,
 .volume-container {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Ocupa o espaço restante */
-    min-width: 0; /* Permite que o container encolha */
+    
+    /* * O botão/ícone tem 36px. O 'gap' (espaço) é 10px.
+     * Total fixo = 46px.
+     * Esta regra diz: "ocupe 100% da linha, MENOS os 46px do ícone e do espaço".
+     * Isso força o slider a se encaixar no espaço restante sem quebrar a linha.
+    */
+    width: calc(100% - 46px); 
 }
 
 /* Estilo dos Sliders */
@@ -82,9 +84,8 @@ body {
 .volume-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 100%; /* O slider ocupa 100% do seu container */
-    /* Reduzindo a espessura da barra */
-    height: 5px; /* De 6px para 5px */
+    width: 100%; /* O slider ocupa 100% do seu container (que agora tem o tamanho certo) */
+    height: 5px; /* Tamanho pequeno mantido */
     background: #e0e0e0;
     border-radius: 5px;
     outline: none;
@@ -96,9 +97,8 @@ body {
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    /* Reduzindo o pino */
-    width: 12px; /* De 14px para 12px */
-    height: 12px; /* De 14px para 12px */
+    width: 12px; /* Tamanho pequeno mantido */
+    height: 12px; /* Tamanho pequeno mantido */
     background: #007bff;
     border-radius: 50%;
     cursor: pointer;
